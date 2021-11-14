@@ -2,10 +2,22 @@ import java.util.Arrays;
 
 public class Ordenamiento {
 
+    /**
+     * Metodo de ordenamiento QuickSort para el usuario
+     * @param arr - arreglo de enteros a ordenar
+     * @return int[] arreglo de los enteros ya ordenado
+     */
     public static int[] quickSort(int[] arr){
         return quickSort(arr, 0, arr.length-1);
     }
 
+    /**
+     * Metodo de ordenamiento QuickSort
+     * @param arr - arreglo desordenado
+     * @param lo - entero con el valor menor en el arreglo
+     * @param hi - entero con el valor maximo en el arreglo
+     * @return int[] - arreglo ya ordenado
+     */
     public static int[] quickSort(int[] arr, int lo, int hi){
         if (lo >= hi) //Cuando no hay algo más para comparar.
             return arr;
@@ -35,20 +47,42 @@ public class Ordenamiento {
     }
 
 
-    public static void mergeSort(int[] arr) {
-        mergeSort(arr, 0, arr.length-1);
+    /**
+     * Metodo de ordenamiento MergeSort para usuario
+     * @param arr - arreglo a ordenar
+     * @return int[] - arreglo ya ordenado
+     */
+    public static int[] mergeSort(int[] arr) {
+        return mergeSort(arr, 0, arr.length-1);
     }
 
-    public static void mergeSort(int [] arr, int low, int high) {
-        if (high <= low) return; //Cuando ya se llega a la minima separación
+    /**
+     * Metodo de ordenamiento MergeSort
+     * @param arr - arreglo a ordenar
+     * @param low - entero con el valor menor del arreglo
+     * @param high - entero con el valor maximo del arreglo
+     * @return int[] - arreglo ya ordenado
+     */
+    public static int[] mergeSort(int [] arr, int low, int high) {
+        if (high <= low) return arr; //Cuando ya se llega a la minima separación
 
         int mid = (low+high)/2;
         mergeSort(arr, low, mid);//Dividimos la primer mitad
         mergeSort(arr, mid+1, high); //Dividimos la segunda mitad
         merge(arr, low, mid, high); //Juntamos mitades
+
+        return arr;
     }
 
-    public static void merge(int[] arr, int low, int mid, int high) {
+    /**
+     * Metodo de ordenamiento Merge
+     * @param arr - arreglo a ordenar
+     * @param low - entero con el valor menor del arreglo
+     * @param mid - entero con el valor que indica la mitad de la longitd del arreglo
+     * @param high - entero con el valor maximo del arreglo
+     * @return int[] - arreglo ya ordenado
+     */
+    public static int[] merge(int[] arr, int low, int mid, int high) {
         int[] lArr = new int[mid - low + 1];
         int[] rArr = new int[high - mid];
 
@@ -77,16 +111,16 @@ public class Ordenamiento {
                 arr[i] = rArr[rIndex++];
             }
         }
+        return arr;
     }
 
     /**
-     * Método que busca la posición del elemento que quieras buscar.
+     * Método que busca la posición del elemento que quieras buscar (para el usuario).
      * @param arr - arreglo en el que buscaremos.
      * @param elem - elemento a buscar.
      * @return la posición del elemento a buscar.
      * -1 si no existe el elemento en el arreglo.
      */
-
     public static int find(int[] arr, int elem){
         return find(arr, elem, 0, arr.length - 1);
     }
@@ -100,8 +134,8 @@ public class Ordenamiento {
      * @return la posición del elemento que buscamos.
      * -1 si el elemento no existe en el arreglo.
      */
-
     public static int find ( int[] arr, int elem, int lo, int hi){
+        quickSort(arr);
         if (lo > hi) { //Si no existe el elemento
             return -1;
         }
@@ -117,10 +151,4 @@ public class Ordenamiento {
             return find(arr, elem, lo, mid - 1);
         }
     }
-
-    public static void main(String[] args) {
-        int[] arr = {1,5,2,3,8,4,6,1,7,9};
-        System.out.println(Arrays.toString(quickSort(arr)));
-    }
-
 }
